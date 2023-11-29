@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Form</title>
+</head>
+<body>
+    <h1>User Form</h1>
+    <form id="userForm">
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" required>
+        <br>
+        <label for="phoneNumber">Phone Number:</label>
+        <input type="tel" id="phoneNumber" name="phoneNumber" required>
+        <br>
+        <label for="crNumber">CR Number:</label>
+        <input type="text" id="crNumber" name="crNumber" required>
+        <br>
+        <button type="button" onclick="saveData()">Submit</button>
+    </form>
+
+    <script>
+        function saveData() {
+            // Get data from the form
+            const username = document.getElementById('username').value;
+            const phoneNumber = document.getElementById('phoneNumber').value;
+            const crNumber = document.getElementById('crNumber').value;
+
+            // Create a CSV string (you can customize this based on your needs)
+            const csvData = `${username},${phoneNumber},${crNumber}\n`;
+
+            // Create a Blob (binary large object) from the CSV data
+            const blob = new Blob([csvData], { type: 'text/csv' });
+
+            // Create a download link and trigger a download
+            const a = document.createElement('a');
+            a.href = URL.createObjectURL(blob);
+            a.download = 'data.csv';
+            a.click();
+        }
+    </script>
+</body>
+</html>
